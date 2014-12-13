@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8">
+		<title>jQueryでスライドショー</title>
+		<style type="text/css">
+		body{
+			margin: 10px auto;
+			text-align: center;
+		}
+		.thumbnail{
+			width: 125px;
+			height: 83px;
+			opacity: 0.5;
+			cursor: pointer;
+		}
+		.current{
+			opacity: 1.0;
+		}
+		.main{
+			width: 625px;
+			height: 415px;
+		}
+		.thumbnail + .thumbnail{
+			margin-left: 4px;
+		}
+		</style>
+	</head>
+	<body>
+		<div id="thumbnails"></div>
+		<div id="main"></div>
+		<div id="nav">
+			<button id="prev">&laquo;前へ</button>
+			<button id="next">次へ&raquo;</button>
+			<button id="play">再生</button>
+			<button id="stop">停止</button>
+		</div>
+		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script>
+			$(function(){
+				var files=[
+				'001.jpg',
+				'002.jpg',
+				'003.jpg'
+				];
+				var img;
+				var timer;
+				var nowPlaying=false;
+				var currentNum=0;
+				for(var i=0;i<files.length;i++){
+					img=$('<img>').attr('src',files[i]).addClass('thumbnail');
+					$('#thumbnails').append(img);
+				}
+				$('#main').append(
+					$('<img>').attr('src',files[0]).addClass('main')
+				);
+				$('.thumbnail:first').addClass('current');
+				$('.thumbnail').click(function(){
+					$('#main img').attr('src', $(this).attr('src')).addClass('main');
+					currentNum=$(this).index()
+					$(this).addClass('current').siblings().removeClass('current');
+				});
+				$('#prev').click(function(){
+					currentNum--;
+					if(currentNum<0){
+						currentNum=files.length-1;
+					}
+					$('#main img').attr('src', files[currentNum]).addClass('main');
+					$('.thumbnail').removeClass('current');
+					$('.thumbnail').eq(currentNum).addClass('current');
+				});
+				$('#next').click(function(){
+					currentNum++;
+					if(currentNum>=files.length){
+						currentNum=0;
+					}
+					$('#main img').attr('src', files[currentNum]).addClass('main');
+					$('.thumbnail').removeClass('current');
+					$('.thumbnail').eq(currentNum).addClass('current');
+				});
+				function autoPlay(){
+					$('#next').click();
+					timer=setTimeout(function(){
+						autoPlay();
+					},1000);
+				}
+				$('#play').click(function(){
+					if(nowPlaying){return;}
+					nowPlaying=true;
+					autoPlay();
+				});
+				$('#stop').click(function(){
+					clearTimeout(timer);
+					nowPlaying=false;
+				});
+			});
+		</script>
+	</body>
+</html>
