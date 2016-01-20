@@ -1,101 +1,25 @@
 <!DOCTYPE html>
 <html lang="ja">
-	<head>
-		<meta charset="utf-8">
-		<title>jQueryでスライドショー</title>
-		<style type="text/css">
-		body{
-			margin: 10px auto;
-			text-align: center;
-		}
-		.thumbnail{
-			width: 125px;
-			height: 83px;
-			opacity: 0.5;
-			cursor: pointer;
-		}
-		.current{
-			opacity: 1.0;
-		}
-		.main{
-			width: 625px;
-			height: 415px;
-		}
-		.thumbnail + .thumbnail{
-			margin-left: 4px;
-		}
-		</style>
-	</head>
-	<body>
-		<div id="thumbnails"></div>
-		<div id="main"></div>
-		<div id="nav">
-			<button id="prev">&laquo;前へ</button>
-			<button id="next">次へ&raquo;</button>
-			<button id="play">再生</button>
-			<button id="stop">停止</button>
-		</div>
-		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
-		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script>
-			$(function(){
-				var files=[
-				'001.jpg',
-				'002.jpg',
-				'003.jpg'
-				];
-				var img;
-				var timer;
-				var nowPlaying=false;
-				var currentNum=0;
-				for(var i=0;i<files.length;i++){
-					img=$('<img>').attr('src',files[i]).addClass('thumbnail');
-					$('#thumbnails').append(img);
-				}
-				$('#main').append(
-					$('<img>').attr('src',files[0]).addClass('main')
-				);
-				$('.thumbnail:first').addClass('current');
-				$('.thumbnail').click(function(){
-					$('#main img').attr('src', $(this).attr('src')).addClass('main');
-					currentNum=$(this).index()
-					$(this).addClass('current').siblings().removeClass('current');
-				});
-				$('#prev').click(function(){
-					currentNum--;
-					if(currentNum<0){
-						currentNum=files.length-1;
-					}
-					$('#main img').attr('src', files[currentNum]).addClass('main');
-					$('.thumbnail').removeClass('current');
-					$('.thumbnail').eq(currentNum).addClass('current');
-				});
-				$('#next').click(function(){
-					currentNum++;
-					if(currentNum>=files.length){
-						currentNum=0;
-					}
-					$('#main img').attr('src', files[currentNum]).addClass('main');
-					$('.thumbnail').removeClass('current');
-					$('.thumbnail').eq(currentNum).addClass('current');
-				});
-				function autoPlay(){
-					$('#next').click();
-					timer=setTimeout(function(){
-						autoPlay();
-					},1000);
-				}
-				$('#play').click(function(){
-					if(nowPlaying){return;}
-					nowPlaying=true;
-					autoPlay();
-				});
-				$('#stop').click(function(){
-					clearTimeout(timer);
-					nowPlaying=false;
-				});
-			});
-		</script>
-	</body>
+<head>
+  <link rel="stylesheet" href="main.css" type="text/css">
+<meta charset="UTF-8">
+<title>時間だヒャッハー</title>
+</head>
+<body>
+  <script type="text/javascript">
+  var year = "2016";var month = "1";var day = "29";var hour = "17";var minute = "15";var centi = "1";
+  var convert = "0";var roop = "";
+  var cnt1 = "日";var cnt2 = "：";var cnt3 = "：";var cnt4 = ".";
+  var baseoffset = "none";
+  var br1 = "1";var br2 = "1";var br3 = "1";var br4 = "1";
+  var com1 = "修論提出まで";var com2 = "と";var com3 = "です";var com4 = "修論提出できたかな？";var end = "2";
+  var width = "400";var height = "150";
+  var font = "arial";var font2 = "7seg4";var size = "27";var l_height = "27";var bold = "";var italic = "";var line = "";
+  var space = "0px 0px 0px 0px";
+  var align = "2";var img = "";
+  var color1 = "FFFFFF";var color2 = "00FF00";var color3 = "000000";
+  </script>
+  <script type="text/javascript" src="http://countdown.reportitle.com/js/neo1.js"></script><a href="http://countdown.reportitle.com/">カウントダウンタイマー</a><script type="text/javascript" src="http://countdown.reportitle.com/js/neo2.js"></script>
+
+</body>
 </html>
